@@ -140,7 +140,7 @@ predict = svm.predict(X_test)
 
 
 """
-Neural Network gives accuraccy of 83.3%, so it won't be used 
+Neural Network gives accuraccy of 83.3%
 """
 nn = MLPClassifier(
     solver="lbfgs", alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1
@@ -271,7 +271,7 @@ R-squared: 0.4480073776450717
 
 ############################################################################################################################
 """
-decistion tree classification accuracy: 0.8589743589743589
+decistion tree classification accuracy: 85.1%
 """
 clf = DecisionTreeClassifier()
 
@@ -313,7 +313,7 @@ y_pred = clf.predict(X_test)
 # plt.show()
 
 """
-Post Purning accuracy is : 0.8910256410256411
+Post Purning accuracy is : 89.1%
 """
 # print("decistion tree classification accuracy:",accuracy_score(y_test, y_pred))
 

@@ -12,70 +12,93 @@ def index():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    predictionKNN = threading.Thread(
-        predictDiabetes.predict_diabetes_KNN,
-        (
-            request.form["cholesterol"],
-            request.form["glucose"],
-            request.form["hdl_chol"],
-            request.form["age"],
-            request.form["weight"],
-            request.form["systolic_bp"],
-            request.form["diastolic_bp"],
-        ),
-    )
-    predictionSVM = threading.Thread(
-        predictDiabetes.predict_diabetes_SVM,
-        (
-            request.form["cholesterol"],
-            request.form["glucose"],
-            request.form["hdl_chol"],
-            request.form["age"],
-            request.form["weight"],
-            request.form["systolic_bp"],
-            request.form["diastolic_bp"],
-        ),
-    )
-    predictionNN = threading.Thread(
-        predictDiabetes.predict_diabetes_NN,
-        (
-            request.form["cholesterol"],
-            request.form["glucose"],
-            request.form["hdl_chol"],
-            request.form["age"],
-            request.form["weight"],
-            request.form["systolic_bp"],
-            request.form["diastolic_bp"],
-        )
-    )
-    predictionDT = threading.Thread(
-        predictDiabetes.predict_diabetes_DT,
-        (
-            request.form["cholesterol"],
-            request.form["glucose"],
-            request.form["hdl_chol"],
-            request.form["age"],
-            request.form["weight"],
-            request.form["systolic_bp"],
-            request.form["diastolic_bp"],
-        )
-    )
+    # getting patient info from Form
+    cholesterol_value = request.form["cholesterol"]
+    glucose_value = request.form["glucose"]
+    hdl_chol_value = request.form["hdl_chol"]
+    age_value = request.form["age"]
+    weight_value = request.form["weight"]
+    systolic_bp_value = request.form["systolic_bp"]
+    diastolic_bp_value = request.form["diastolic_bp"]
 
-    # Starting the Threads
-    predictionKNN.start()
-    predictionSVM.start()
-    predictionNN.start()
-    predictionDT.start()
+    def run_knn():
+        global knn_prediction
+        result = predictDiabetes.predict_diabetes_KNN(
+            cholesterol_value,
+            glucose_value,
+            hdl_chol_value,
+            age_value,
+            weight_value,
+            systolic_bp_value,
+            diastolic_bp_value,
+        )
+        knn_prediction = result
 
-    # Stopping the Threads
-    predictionKNN.join()
-    predictionSVM.join()
-    predictionNN.join()
-    predictionDT.join()
+    def run_svm():
+        global svm_prediction
+        result = predictDiabetes.predict_diabetes_SVM(
+            cholesterol_value,
+            glucose_value,
+            hdl_chol_value,
+            age_value,
+            weight_value,
+            systolic_bp_value,
+            diastolic_bp_value,
+        )
+        svm_prediction = result
+
+    def run_nn():
+        global nn_prediction
+        result = predictDiabetes.predict_diabetes_NN(
+            cholesterol_value,
+            glucose_value,
+            hdl_chol_value,
+            age_value,
+            weight_value,
+            systolic_bp_value,
+            diastolic_bp_value,
+        )
+        nn_prediction = result
+
+    def run_dt():
+        global dt_prediction
+        result = predictDiabetes.predict_diabetes_DT(
+            cholesterol_value,
+            glucose_value,
+            hdl_chol_value,
+            age_value,
+            weight_value,
+            systolic_bp_value,
+            diastolic_bp_value,
+        )
+        dt_prediction = result
+
+    # Assign each a thread to each model
+    thread_knn = threading.Thread(target=run_knn)
+    thread_svm = threading.Thread(target=run_svm)
+    thread_nn = threading.Thread(target=run_nn)
+    thread_dt = threading.Thread(target=run_dt)
+
+    # start the threads concerruntly
+    thread_knn.start()
+    thread_svm.start()
+    thread_nn.start()
+    thread_dt.start()
+
+    # terminate the threads when they're done
+    thread_knn.join()
+    thread_svm.join()
+    thread_nn.join()
+    thread_dt.join()
 
     return render_template(
-        "diabetic.html",
-        predictions=(predictionKNN, predictionSVM, predictionNN, predictionDT),
+        "result.html",
+        predictions={
+            "knn_prediction": knn_prediction,
+            "svm_prediction": svm_prediction,
+            "nn_prediction": nn_prediction,
+            "dt_prediction": dt_prediction,
+        },
     )
 
 

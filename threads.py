@@ -2,13 +2,15 @@ import predictDiabetes
 import threading
 
 
-cholesterol_value = 200
-glucose_value = 120
-hdl_chol_value = 50
-age_value = 40
-weight_value = 70
-systolic_bp_value = 120
-diastolic_bp_value = 80
+cholesterol_value = 279
+glucose_value = 270
+hdl_chol_value = 40
+age_value = 60
+weight_value = 224 / 2.2
+systolic_bp_value = 174
+diastolic_bp_value = 90
+
+print('knn : ', predictDiabetes.predict_diabetes_KNN(cholesterol_value, glucose_value, hdl_chol_value, age_value, weight_value, systolic_bp_value, diastolic_bp_value))
 
 def run_knn():
     result = predictDiabetes.predict_diabetes_KNN(cholesterol_value, glucose_value, hdl_chol_value, age_value, weight_value, systolic_bp_value, diastolic_bp_value)

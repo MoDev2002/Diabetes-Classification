@@ -15,8 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-
 </head>
 
 <body id="main_body">
@@ -27,7 +25,6 @@
                 <a class="navbar-brand" href="#">
                     <img src="../static/img/icon.png" width="30px" height="30px">
                 </a>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -127,7 +124,7 @@
 
     <hr>
 
-    <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- Cards -->
 
 
     <div class="container-fluid mb-5 pb-5 border-opacity-50  border-black" id="header_4">
@@ -213,21 +210,50 @@
                                 it has been found that the SVM model achieves an impressive accuracy score of
                                 <b>92.94%</b>. This high accuracy score highlights the effectiveness of the SVM
                                 algorithm in accurately classifying diabetes cases in the dataset. The SVM classifier
-                                will be utilized to provide reliable predictions in the classification process.</p>
+                                will be utilized to provide reliable predictions in the classification process.
+                            </p>
                         </div>
                     </div>
+                    <h2 class="mt-5 mb-5 cards_header">Neural Network Model</h1>
+                        <div class="card container mt-5">
+                            <div class="card-body border-5">
+                                <h5 class="card-title fw-bold">Neural Network Model Accuracy</h5>
+                                <p class="card-text">The neural network model, implemented using the MLPClassifier in
+                                    the sklearn library, has been evaluated for accuracy. Due to the limited size of the
+                                    dataset, the model yields a lower accuracy score of <b>83.3%</b>. However, it is
+                                    important to note that the small dataset size limits the model's ability to
+                                    generalize effectively.</p>
+                            </div>
+                        </div>
+                        <h2 class="mt-5 mb-5 cards_header">Decision Tree Model</h1>
+                            <div class="card container mt-5">
+                                <div class="card-body border-5">
+                                    <img src="../static/img/post-purning_dt_c.png" class="card-img-top border-5 fw-bold  "
+                                        width="100" height="500" alt="3">
+                                    <h5 class="card-title fw-bold">Decicion Tree Model Accuracy</h5>
+                                    <p class="card-text">The Decision Tree classification model was employed to predict
+                                        diabetes in the dataset. The initial model achieved an accuracy of <b>85.1%</b>.
+                                        To
+                                        enhance performance and prevent overfitting, post-pruning techniques were
+                                        applied, resulting in a refined accuracy of <b>89.1%</b>. This signifies the
+                                        effectiveness of decision tree modeling in accurately classifying diabetes
+                                        cases, with post-pruning contributing to improved generalization and
+                                        reliability.
+                                    </p>
+                                </div>
+                            </div>
         </div>
     </div>
 
-    <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- Form -->
 
     <div id="form_style">
         <h1 class="text-center pt-5 mt-5 mb-5" id="form_header">Diabetes classification</h1>
         <form action="/predict" method="post">
             <div class="container justify-content-center">
                 <div class="input-group">
-                    <input type="text" aria-label=" feature 2" class="form-control" id="input_2" placeholder="Glucose (Standard Rate 70-99 mg/dL)"
-                        name="glucose">
+                    <input type="text" aria-label=" feature 2" class="form-control" id="input_2"
+                        placeholder="Glucose (Standard Rate 70-99 mg/dL)" name="glucose">
                     <span class="input-group-text">mg/dL</span>
                 </div>
                 <div class="row justify-content-center mt-5 mb-5">
@@ -270,17 +296,12 @@
                 </div>
                 <div class="container-fluid justify-content-end text-end ">
                     <button class="btn mb-4 ms-4 submit_btn" type="submit" name="predict_button"
-                        value="knn_predict">Predict
-                        Using KNN</button>
-                    <button class="btn mb-4 ms-4 submit_btn" type="submit" name="predict_button"
-                        value="svm_predict">Predict
-                        Using SVM</button>
+                        value="knn_predict">Show Results</button>
                 </div>
             </div>
 
         </form>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
