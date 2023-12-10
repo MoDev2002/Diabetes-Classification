@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/diabetic.css">
     <title>Diabetic</title>
-    
+
 </head>
+
 <body>
     <div class="container-fluid">
-    <div class="col-12 svg-animation">
-        <object type="image/svg+xml" width="400px" height="400px" data="../static/img/parkinson-animate.svg"></object>
+        <div class="col-12">
+            {{ predictions[3] }}
+        </div>
+        <div class="col-12">
+            <h1>You have diabetes. Seek medical attention.</h1>
+        </div>
     </div>
-    <div class="col-12">
-        <h1>You have diabetes. Seek medical attention.</h1>
-    </div>
-</div>
 
 </body>
+
 </html>
