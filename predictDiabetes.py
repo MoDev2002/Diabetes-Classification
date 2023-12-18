@@ -4,7 +4,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import svm
 from sklearn.linear_model import LinearRegression
@@ -129,6 +129,12 @@ plt.show()
 kNN = KNeighborsClassifier(n_neighbors=5)
 kNN.fit(X_train, y_train)
 kNN_pred = kNN.predict(X_test)
+'''
+knn_confusion_matrix = confusion_matrix(y_test, kNN_pred)
+cm_display = ConfusionMatrixDisplay(confusion_matrix = knn_confusion_matrix, display_labels=["Not Diabetic", "Diabetic"])
+cm_display.plot()
+plt.show()
+'''
 
 
 # SVM Model
@@ -137,7 +143,12 @@ svm.fit(X_train, y_train)
 predict = svm.predict(X_test)
 # accuraccy 92.94%
 # print('svm accuracy : ', accuracy_score(y_test, predict))
-
+'''
+svm_confusion_matrix = confusion_matrix(y_test, predict)
+cm_display = ConfusionMatrixDisplay(confusion_matrix = svm_confusion_matrix, display_labels=["Not Diabetic", "Diabetic"])
+cm_display.plot()
+plt.show()
+'''
 
 """
 Neural Network gives accuraccy of 83.3%
@@ -148,7 +159,12 @@ nn = MLPClassifier(
 nn.fit(X_train, y_train)
 nnpredict = nn.predict(X_test)
 # print('nn accuracy : ', accuracy_score(y_test, nnpredict))
-
+'''
+nn_confusion_matrix = confusion_matrix(y_test, nnpredict)
+cm_display = ConfusionMatrixDisplay(confusion_matrix = nn_confusion_matrix, display_labels=["Not Diabetic", "Diabetic"])
+cm_display.plot()
+plt.show()
+'''
 
 def predict_diabetes_KNN(
     cholesterol, glucose, hdl_chol, age, weight, systolic_bp, diastolic_bp
@@ -311,6 +327,12 @@ y_pred = clf.predict(X_test)
 # plt.figure(figsize=(12,8))
 # tree.plot_tree(clf,rounded=True,filled=True)
 # plt.show()
+'''
+dt_confusion_matrix = confusion_matrix(y_test, y_pred)
+cm_display = ConfusionMatrixDisplay(confusion_matrix = dt_confusion_matrix, display_labels=["Not Diabetic", "Diabetic"])
+cm_display.plot()
+plt.show()
+'''
 
 """
 Post Purning accuracy is : 89.1%
